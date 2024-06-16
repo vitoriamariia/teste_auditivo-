@@ -1,6 +1,8 @@
 PennController.ResetPrefix(null);
+PennController.DebugOff();
 
-Sequence("Participantes", "Instrucoes", "Experimento", "Final");
+
+Sequence("Participantes", "Instrucoes", randomize("Experimento"), SendResults(),"Final");
 
 Header(
   defaultText
@@ -21,19 +23,14 @@ newTrial("Participantes",
     .print(),
   newText("<p>Por gentileza, selecione o CURSO que faz na UFERSA</p>")
     .print(),
-  newDropDown("Curso")
+  newDropDown("Selecione seu curso")
     .add("Engenharia", "Ciencias e Tecnologias", "Letras")
     .css("font-size", "1.2em")
     .print()
     .log(),
   newButton("Vamos para as instrucoes")
     .print()
-    .wait(
-      getDropDown("Curso").test.selected()  // Certifique-se de que um curso foi selecionado
-    )
-    .setVar("Curso", getDropDown("Curso").settings.callback(function(dropdown){
-      return dropdown.element.value;
-    })) 
+    .wait()
 );
 
 newTrial("Instrucoes",
@@ -55,8 +52,7 @@ newTrial("Experimento",
   newButton("Proximo")
     .print()
     .wait()
-)
-.log("Curso", getVar("Curso"));  
+);
 
 
 newTrial("Final",
