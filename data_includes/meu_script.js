@@ -25,7 +25,7 @@ newTrial("Participantes",
     .print()
     .log(),
   newDropDown("Curso que faz na UFERSA")
-    .add("Engenharia", "Letras")
+  .add("Engenharia", "Ciencias e Tecnologias", "Letras")
     .css("font-size", "1.2em")
     .print()
     .log(),
@@ -39,7 +39,7 @@ newTrial("Participantes",
 .log("NOME", getVar("NOME"));
 
 newTrial("Instrucoes",
-  newText("<p>INSTRUÇÕES:</p>")
+  newText("<p>Leia com atencao:</p>")
     .print(),
   newText("<p>Ouça o áudio e clique no botão para continuar.</p>")
     .print(),
