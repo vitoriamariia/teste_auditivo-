@@ -32,7 +32,7 @@ newTrial("Participantes",
     .wait(
       getDropDown("Curso").test.selected()  // Certifique-se de que um curso foi selecionado
     )
-    .setVar("Curso", getDropDown("Curso"))  // Armazena o curso na variável global
+    .setVar("Curso", getDropDown("Curso").selected())  // Armazena o curso na variável global
 );
 
 // Tela de instruções
@@ -57,7 +57,7 @@ newTrial("Experimento",
     .print()
     .wait()
 )
-.log("Curso", getVar("Curso"));
+.log("Curso", getVar("Curso"));  // Log do curso selecionado
 
 // Tela de agradecimento
 newTrial("Final",
