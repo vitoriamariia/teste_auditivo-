@@ -21,9 +21,6 @@ newTrial("Participantes",
     .print(),
   newText("<p> Por gentileza, informe o seu NOME COMPLETO e o CURSO que faz na UFERSA </p>")
     .print(),
-  newTextInput("Nome")
-    .print()
-    .log(),
   newDropDown("Curso que faz na UFERSA")
   .add("Engenharia", "Ciencias e Tecnologias", "Letras")
     .css("font-size", "1.2em")
