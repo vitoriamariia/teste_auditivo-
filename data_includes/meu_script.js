@@ -1,6 +1,6 @@
 PennController.ResetPrefix(null);
 
-Sequence("Participantes", "Instrucoes", "Experimento1", randomize("Experimento2"), "Final");
+Sequence("Participantes", "Instrucoes", randomize("Experimento1"), "Final");
 
 Header(
   defaultText
@@ -19,26 +19,22 @@ Header(
 newTrial("Participantes",
   newText("<p> Olá! Seja bem-vindo ao nosso experimento!</p>")
     .print(),
-  newText("<p> Por gentileza, informe o seu NOME COMPLETO e o CURSO que faz na UFERSA </p>")
+  newText("<p> Por gentileza, informe o CURSO que faz na UFERSA </p>")
     .print(),
   newDropDown("Curso que faz na UFERSA")
   .add("Engenharia", "Ciencias e Tecnologias", "Letras")
     .css("font-size", "1.2em")
     .print()
     .log(),
-  newButton("Iniciar")
+  newButton("Vamos para as instruções")
     .print()
     .wait(),
-  newVar("NOME")
-    .global()
-    .set(getTextInput("Nome"))
-)
-.log("NOME", getVar("NOME"));
+);
 
 newTrial("Instrucoes",
   newText("<p>Leia com atencao:</p>")
     .print(),
-  newText("<p>Ouça o áudio e clique no botão para continuar.</p>")
+  newText("<p>Leia a situação fictícia e leia em voz alta a frase em destaque</p>")
     .print(),
   newButton("Iniciar")
     .print()
@@ -46,43 +42,13 @@ newTrial("Instrucoes",
 );
 
 newTrial("Experimento1",
-  newImage("alto_falante_Icone.png")
-    .size(90, 90)
-    .print(),
+  newText("Imagine a seguinte situação: você encontra uma receita de macarrão gourmet no TikTok e resolve recriar essa receita. Suponha que você seguiu a receita à risca, com todos os seus passos. Ao final, prova e gosta muito. Você, então, diz:")
+  .print(),
+  newText("Ficou muito gostoso, o macarrão")
+  .print(),
   newButton("Próximo")
     .print()
     .wait()
-);
-
-Template("tabela_script_auditivo.csv",
-  row => newTrial("Experimento2",
-    newAudio("AudioExperimento", row.AudioExperimento)
-      .play(),
-    newImage("alto_falante_Icone.png")
-      .size(90, 90)
-      .print(),
-    newButton("Próximo")
-      .log()
-      .wait()
-      .remove(),
-    getImage("alto_falante_Icone.png")
-      .remove(),
-    newText("A", row.SentencaA)
-      .print(),
-    newText("B", row.SentencaB)
-      .print(),
-    newCanvas("2000vw", "800vh")
-      .add("center at 25%", "middle at 50%", getText("A"))
-      .add("center at 75%", "middle at 50%", getText("B"))
-      .print(),
-    newSelector()
-      .add(getText("A"), getText("B"))
-      .keys("A", "B")
-      .log()
-      .wait()
-  )
-  .log("Group", row.Group)
-  .log("Item", row.Item)
 );
 
 newTrial("Final",
