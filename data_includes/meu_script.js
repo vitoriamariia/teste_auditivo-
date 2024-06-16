@@ -1,6 +1,6 @@
 PennController.ResetPrefix(null);
 
-Sequence("Participantes", "Instrucoes", randomize("Experimento"), "Final");
+Sequence("Participantes", "Instrucoes", "Experimento1", randomize("Experimento2"), "Final");
 
 Header(
   defaultText
@@ -41,15 +41,24 @@ newTrial("Participantes",
 newTrial("Instrucoes",
   newText("<p>INSTRUÇÕES:</p>")
     .print(),
-  newText("<p>Ouça e clique</p>")
+  newText("<p>Ouça o áudio e clique no botão para continuar.</p>")
     .print(),
   newButton("Iniciar")
     .print()
     .wait()
 );
 
+newTrial("Experimento1",
+  newImage("alto_falante_Icone.png")
+    .size(90, 90)
+    .print(),
+  newButton("Próximo")
+    .print()
+    .wait()
+);
+
 Template("tabela_script_auditivo.csv",
-  row => newTrial("Experimento",
+  row => newTrial("Experimento2",
     newAudio("AudioExperimento", row.AudioExperimento)
       .play(),
     newImage("alto_falante_Icone.png")
@@ -66,8 +75,8 @@ Template("tabela_script_auditivo.csv",
     newText("B", row.SentencaB)
       .print(),
     newCanvas("2000vw", "800vh")
-      .add("center at 25%", "middle at 2%", getText("A"))
-      .add("center at 75%", "middle at 2%", getText("B"))
+      .add("center at 25%", "middle at 50%", getText("A"))
+      .add("center at 75%", "middle at 50%", getText("B"))
       .print(),
     newSelector()
       .add(getText("A"), getText("B"))
@@ -80,7 +89,7 @@ Template("tabela_script_auditivo.csv",
 );
 
 newTrial("Final",
-  newText("Obrigada")
+  newText("Obrigada por participar do experimento!")
     .print(),
   newButton("Finalizar")
     .print()
