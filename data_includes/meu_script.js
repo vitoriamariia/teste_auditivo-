@@ -19,8 +19,11 @@ Header(
 newTrial("Participantes",
   newText("<p> Olá! Seja bem-vindo ao nosso experimento!</p>")
     .print(),
-  newText("<p> Por gentileza, informe o CURSO que faz na UFERSA </p>")
+  newText("<p> Por gentileza, informe o seu NOME COMPLETO e o CURSO que faz na UFERSA </p>")
     .print(),
+  newTextInput("Nome")
+    .print()
+    .log(),
   newDropDown("Curso que faz na UFERSA")
     .add("Engenharia", "Letras")
     .css("font-size", "1.2em")
@@ -54,11 +57,14 @@ Template("tabela_script_auditivo.csv",
       .print(),
     newButton("Próximo")
       .log()
+      .wait()
       .remove(),
     getImage("alto_falante_Icone.png")
       .remove(),
-    newText("A", row.SentencaA),
-    newText("B", row.SentencaB),
+    newText("A", row.SentencaA)
+      .print(),
+    newText("B", row.SentencaB)
+      .print(),
     newCanvas("2000vw", "800vh")
       .add("center at 25%", "middle at 2%", getText("A"))
       .add("center at 75%", "middle at 2%", getText("B"))
