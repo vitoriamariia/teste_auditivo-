@@ -31,6 +31,7 @@ newTrial("Participantes",
   newButton("Vamos para as instrucoes")
     .print()
     .wait()
+    .log()
 );
 
 newTrial("Instrucoes",
@@ -41,6 +42,7 @@ newTrial("Instrucoes",
   newButton("Iniciar")
     .print()
     .wait()
+    .log()
 );
 
 newTrial("Experimento",
@@ -52,6 +54,7 @@ newTrial("Experimento",
   newButton("Proximo")
     .print()
     .wait()
+    .log()
 );
 
 
@@ -61,5 +64,6 @@ newTrial("Final",
   newButton("Finalizar")
     .print()
     .wait()
+    .log()
 )
 .setOption("countsForProgressBar", false);
