@@ -1,8 +1,7 @@
 PennController.ResetPrefix(null);
 PennController.DebugOff();
 
-
-Sequence("Participantes", "Instrucoes", randomize("Experimento"), SendResults(),"Final");
+Sequence("Participantes", "Instrucoes", "TestePerceptivo", "Experimento1", "Experimento2", "Final", SendResults());
 
 Header(
   defaultText
@@ -19,81 +18,81 @@ Header(
 );
 
 newTrial("Participantes",
-  newText("<p>Ola! Seja bem-vindo ao nosso experimento!</p>"),
-         
-  newText("<p>Por gentileza, escreva o SEU NOME COMPLETO NA CAIXA ABAIXO"),
-         
-  newTextInput("Seu nome"),
-  
-  newText("<p>Por gentileza, selecione o CURSO que faz na UFERSA</p>").
-    
-  newDropDown("Selecione seu curso")
+  newText("Ola! Seja bem-vindo ao nosso experimento!")
+    .print(),
+  newText("Por gentileza, escreva o SEU NOME COMPLETO NA CAIXA ABAIXO")
+    .print(),
+  newTextInput("SeuNome")
+    .print()
+    .log(),
+  newText("Por gentileza, selecione o CURSO que faz na UFERSA")
+    .print(),
+  newDropDown("curso", "Selecione seu curso")
     .add("Engenharia", "Ciencias e Tecnologias", "Letras")
     .css("font-size", "1.2em")
     .print()
     .log(),
-         
   newButton("Vamos para as instrucoes")
     .print()
     .wait()
-    .log(),
-
-  newVar("NOME")
-    .global
-    .set(getTextInput("Seu nome"))
-  )
-.log( "NOME", getVar(NOME"))
-         
 );
 
 newTrial("Instrucoes",
-  newText("<p>Leia com atencao:</p>")
+  newText("Leia com atenção:")
     .print(),
-  newText("<p>Leia a situacao ficticia e leia em voz alta a frase em destaque</p>")
+  newText("Leia a situação fictícia e leia em voz alta a frase em destaque")
     .print(),
   newButton("Iniciar")
-    .log()
+    .print()
+    .wait()
 );
 
-Template("teste_auditivo.csv",
-  row =>  newTrial("Experimento",
-    newAudio("AudioExperimento",row,AudioExperimento)
-     .play(),
-                   
-    newImage("alto_falante_icone.png")
-     .size( 90 , 90)
-     .print(),
-    newButton("Próximo")
-      .log()
-      .remove(),
-    getImage(alto_falante_icone.png)
-      .remove(),
-    newText("A", row.SentencaA),
-    newText("B", row.SentencaB),
-    newCanvas("2000vw", "800vw")
-      .add("center at 25%", "middle at 2%", getText("A"))
-      .add("center at 75%", "middle at 2%", getText("B"))
-      .print(),
+newTrial("TestePerceptivo",
+  Template("teste_auditivo.csv",
+    row => newTrial("TestePerceptivo",
+      newText("Qual a melhor interpretação?")
+        .print(),
+      newButton("Esquerda")
+        .css("font-size", "1.2em")
+        .print()
+        .left()
+        .wait()
+        .log(),
+      newButton("Direita")
+        .css("font-size", "1.2em")
+        .print()
+        .right()
+        .wait()
+        .log(),
+      newCanvas("canvas", 1000, 500)
+        .add(250, 250, newText("A", row.SentencaA).css("font-size", "1.2em"))
+        .add(750, 250, newText("B", row.SentencaB).css("font-size", "1.2em"))
+        .print(),
+      newSelector()
+        .add(getText("A"), getText("B"))
+        .keys("A", "B")
+        .log()
+        .wait()
+    )
+    .log("Group", row.Group)
+    .log("Item", row.Item)
+  )
+);
 
-    newSelector()
-      .add(getText("A"), getText("B"))
-      .keys("A","B")
-      .log
-      .wait
-      )
-    .log("Group",rowGroup)
-    .log("Item". row.Item))
-                  
-  newTrial("Experimento2")
-  newText("Imagine a seguinte situacao: voce encontra uma receita de macarrao gourmet no TikTok e resolve recriar essa receita. Suponha que voce seguiu a receita a risca, com todos os seus passos. Ao final, prova e gosta muito. Voce, entao, diz:")
-     .print(),
-  newText("Ficou muito gostoso, o macarrao")
-     .css("font-weight", "bold")
-     .print(),
-  newButton("Proximo")
-     .print()
-     .wait()
-     .log()
+newTrial("Experimento1",
+  newText("Aqui seria o Experimento1...")
+    .print(),
+  newButton("Próximo")
+    .print()
+    .wait()
+);
+
+newTrial("Experimento2",
+  newText("Aqui seria o Experimento2...")
+    .print(),
+  newButton("Próximo")
+    .print()
+    .wait()
 );
 
 newTrial("Final",
@@ -102,6 +101,5 @@ newTrial("Final",
   newButton("Finalizar")
     .print()
     .wait()
-    .log()
 )
 .setOption("countsForProgressBar", false);
