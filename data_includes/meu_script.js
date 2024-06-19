@@ -19,19 +19,31 @@ Header(
 );
 
 newTrial("Participantes",
-  newText("<p>Ola! Seja bem-vindo ao nosso experimento!</p>")
-    .print(),
-  newText("<p>Por gentileza, selecione o CURSO que faz na UFERSA</p>")
-    .print(),
+  newText("<p>Ola! Seja bem-vindo ao nosso experimento!</p>"),
+         
+  newText("<p>Por gentileza, escreva o SEU NOME COMPLETO NA CAIXA ABAIXO"),
+         
+  newTextInput("Seu nome"),
+  
+  newText("<p>Por gentileza, selecione o CURSO que faz na UFERSA</p>").
+    
   newDropDown("Selecione seu curso")
     .add("Engenharia", "Ciencias e Tecnologias", "Letras")
     .css("font-size", "1.2em")
     .print()
     .log(),
+         
   newButton("Vamos para as instrucoes")
     .print()
     .wait()
-    .log()
+    .log(),
+
+  newVar("NOME")
+    .global
+    .set(getTextInput("Seu nome"))
+  )
+.log( "NOME", getVar(NOME"))
+         
 );
 
 newTrial("Instrucoes",
@@ -40,11 +52,10 @@ newTrial("Instrucoes",
   newText("<p>Leia a situacao ficticia e leia em voz alta a frase em destaque</p>")
     .print(),
   newButton("Iniciar")
-    .print()
-    .wait()
     .log()
 );
 
+Template
 newTrial("Experimento",
   newText("Imagine a seguinte situacao: voce encontra uma receita de macarrao gourmet no TikTok e resolve recriar essa receita. Suponha que voce seguiu a receita a risca, com todos os seus passos. Ao final, prova e gosta muito. Voce, entao, diz:")
     .print(),
