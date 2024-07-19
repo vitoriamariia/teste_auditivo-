@@ -6,21 +6,23 @@ Sequence("participantes", "audio1", "fim");
 
 // Trial de introdução
 newTrial("participantes",
-    newText("Bem-vindos", "Pressione o botão "continuar")
-    newbutton("continuar")
+    newText("Bem-vindos", "Pressione o botão 'Continuar' para iniciar.")
+        .print(),
+    newButton("continuar", "Continuar")
         .print()
         .wait()
 );
 
+// Trial com o áudio e medição do tempo de resposta
 newTrial("audio1",
-    newTimer("responseTimer1"), // 
-    newAudio("a1", "path/to/a1.wav") 
+    newTimer("responseTimer1"), // Temporizador para medir o tempo de resposta
+    newAudio("audio1", "path/to/audio1.wav") // Substitua com o caminho correto para o áudio
         .print()
         .play()
         .wait()
         .callback(() => newTimer("responseTimer1").start()), 
     
-    newText("question1", "Escolha a melhor resposta para o áudio")
+    newText("question1", "Escolha a melhor resposta para o áudio:")
         .print(),
     
     newRow(
@@ -37,7 +39,7 @@ newTrial("audio1",
         .wait()
         .callback(() => {
             newTimer("responseTimer1").stop(); 
-            newLog("responseTime1", newTimer("responseTimer1").getTime()); 
+            newLog("responseTime1", newTimer("responseTimer1").getTime()); // Registra o tempo de resposta
         })
 );
 
