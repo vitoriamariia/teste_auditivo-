@@ -2,7 +2,7 @@ PennController.ResetPrefix(null);
 PennController.DebugOff();
 
 // Define a sequência dos trials
-Sequence("participantes", "audio1", "audio2", "fim");
+Sequence("participantes", "audio1", "fim");
 
 // Trial de introdução
 newTrial("participantes",
