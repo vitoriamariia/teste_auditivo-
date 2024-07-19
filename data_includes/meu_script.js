@@ -18,9 +18,9 @@ newTrial("audio1",
         .print()
         .play()
         .wait()
-        .callback(() => newTimer("responseTimer1").start()), // Inicia o temporizador após o áudio terminar
+        .callback(() => newTimer("responseTimer1").start()), 
     
-    newText("question1", "Choose the best response for the first audio:")
+    newText("question1", "Escolha a melhor resposta para o áudio")
         .print(),
     
     newRow(
@@ -36,47 +36,15 @@ newTrial("audio1",
         .print()
         .wait()
         .callback(() => {
-            newTimer("responseTimer1").stop(); // Para o temporizador quando a resposta é dada
-            newLog("responseTime1", newTimer("responseTimer1").getTime()); // Registra o tempo de resposta
+            newTimer("responseTimer1").stop(); 
+            newLog("responseTime1", newTimer("responseTimer1").getTime()); 
         })
 );
 
-// Trial com o segundo áudio WAV e medição do tempo de resposta
-newTrial("audio2",
-    newTimer("responseTimer2"), // Temporizador para o segundo áudio
-    newAudio("a2", "path/to/a2.wav") // Substitua com o caminho correto para o áudio a2.wav
-        .print()
-        .play()
-        .wait()
-        .callback(() => newTimer("responseTimer2").start()), // Inicia o temporizador após o áudio terminar
-    
-    newText("question2", "Choose the best response for the second audio:")
-        .print(),
-    
-    newRow(
-        newButton("response2a", "Response B1")
-            .print(),
-        newButton("response2b", "Response B2")
-            .print(),
-        newButton("response2c", "Response B3")
-            .print()
-    ),
-    
-    newButton("submit2", "Submit")
-        .print()
-        .wait()
-        .callback(() => {
-            newTimer("responseTimer2").stop(); // Para o temporizador quando a resposta é dada
-            newLog("responseTime2", newTimer("responseTimer2").getTime()); // Registra o tempo de resposta
-        })
-);
-
-// Trial de finalização
-newTrial("end",
+newTrial("fim",
     newText("Thank you", "Thank you for participating. Press any key to finish.")
         .print()
         .wait()
 );
 
-// Envia os resultados
 SendResults("send");
