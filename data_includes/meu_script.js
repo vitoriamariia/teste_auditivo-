@@ -2,19 +2,19 @@ PennController.ResetPrefix(null);
 PennController.DebugOff();
 
 // Define a sequência dos trials
-Sequence("intro", "audio1", "audio2", "end");
+Sequence("participantes", "audio1", "audio2", "fim");
 
 // Trial de introdução
-newTrial("intro",
-    newText("Welcome", "Welcome to the experiment. Press any key to begin.")
+newTrial("participantes",
+    newText("Bem-vindos", "Pressione o botão "continuar")
+    newbutton("continuar")
         .print()
         .wait()
 );
 
-// Trial com o primeiro áudio WAV e medição do tempo de resposta
 newTrial("audio1",
-    newTimer("responseTimer1"), // Temporizador para o primeiro áudio
-    newAudio("a1", "path/to/a1.wav") // Substitua com o caminho correto para o áudio a1.wav
+    newTimer("responseTimer1"), // 
+    newAudio("a1", "path/to/a1.wav") 
         .print()
         .play()
         .wait()
